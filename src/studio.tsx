@@ -457,7 +457,7 @@ function LayerStudioView(props: { manifestPath: string; config: RuntimeConfig; o
       ],
       ["Save Status", esc(saveState)],
     ];
-    return `| | |\n|---|---|\n${rows.map(([k, v]) => `| **${k}** | ${v} |`).join("\n")}`;
+    return rows.map(([k, v]) => `**${k}**: ${v}`).join("  \n");
   }
 
   return (
@@ -820,7 +820,10 @@ export default function StudioCommand() {
                       : []),
 
                     {
-                      tag: item.type === "screenshot" ? `${item.trackCount ?? 0} tracks` : `${item.sizeMb ?? 0} MB`,
+                      tag:
+                        item.type === "screenshot"
+                          ? `${item.trackCount ?? 0} ${item.trackCount === 1 ? "track" : "tracks"}`
+                          : `${item.sizeMb ?? 0} MB`,
                     },
                   ]}
                   detail={
